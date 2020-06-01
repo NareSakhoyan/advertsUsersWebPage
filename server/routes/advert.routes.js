@@ -1,7 +1,8 @@
 module.exports = app => {
-    const advert = require("../controllers/adverts.controller.js");
+    const advert = require("../controllers/adverts.controller");
 
     let router = require("express").Router();
+    // let router = express.Router();
 
     // Create a new advert
     router.post("/", advert.create);
@@ -22,7 +23,7 @@ module.exports = app => {
     router.delete("/", advert.deleteAll);
 
     //Find advert by userID
-    router.get("/?userID/?smth", advert.findAdvertByUserID);
+    router.get("/userID", advert.findAdvertByUserID);
 
     app.use('/api/adverts', router);
 };

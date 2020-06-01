@@ -24,10 +24,6 @@ export default {
         return localStorage.token
     },
 
-    // getUserId () {
-    //     return localStorage.userID
-    // },
-
     logout (cb) {
         delete localStorage.token
         // delete localStorage.userID
@@ -49,13 +45,11 @@ function pretendRequest (emailParam, passParam, cb) {
             let tmp = response.data[0];
             if (tmp){
                 const {id, email, pass} = tmp;
-
                 setTimeout(() => {
                     if (emailParam === email && passParam === pass) {
-                        // localStorage.userID = id;
                         cb({
                             authenticated: true,
-                            token: Math.random().toString(36).substring(7).concat(id)
+                            token: Math.random().toString(36).substring(7).slice(0, 5).concat(id)
                         })
                     } else {
                         cb({ authenticated: false })
@@ -73,3 +67,4 @@ function pretendRequest (emailParam, passParam, cb) {
         })
 
 }
+

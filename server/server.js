@@ -28,6 +28,11 @@ app.get('/', (req, res) => {
     res.json({message: 'welcome to my app'})
 });
 
+// const apiUserRout = require('./routes/user.routes')
+// const apiAdvertRout = require('./routes/advert.routes')
+// app.use('/advert', apiUserRout)
+// app.use('/user', apiAdvertRout)
+
 require('./routes/user.routes')(app)
 require('./routes/advert.routes')(app)
 

@@ -40,12 +40,13 @@
 </template>
 
 <script>
-    import AdvertDataService from "../services/AdvertDataService";
+    import AdvertDataService from "../../services/AdvertDataService";
 
     export default {
         name: "AddAdvert",
         data(){
             return{
+                userID: this.$route.params.userID,
                 advert: {
                     id:null,
                     userID: '',
@@ -55,15 +56,11 @@
                     longDescription: '',
                     price: '',
                 },
-                userID: this.getUserID()
             };
         },
         methods: {
-            getUserID() {
-                let tmp = localStorage.token
-                return tmp.slice(6, tmp.length);
-            },
             saveAdvert() {
+                console.log('from saveAdvert userID', this.userID)
                 let data = {
                     userID: this.userID,
                     imgUrl: './'+this.advert.imgUrl+'/',

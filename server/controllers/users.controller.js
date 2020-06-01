@@ -54,7 +54,6 @@ exports.findAll = (req, res) => {
 // Find a single User with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-
     User.findByPk(id)
         .then(data => {
             res.send(data);
@@ -136,7 +135,6 @@ exports.deleteAll = (req, res) => {
 //Find user via email
 exports.findByUserEmail = (req, res) => {
     const {email} = req.body;
-
     User.find({ where: { email: email } })
         .then(data => {
             res.send(data);

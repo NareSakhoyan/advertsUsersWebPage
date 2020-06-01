@@ -6,6 +6,7 @@ class UserDataService {
     }
 
     get(id) {
+        console.log(`id: ${id}`)
         return http.get(`/users/${id}`);
     }
 

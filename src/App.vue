@@ -19,7 +19,7 @@
     components: {Home, Header},
     data () {
       return {
-        loggedIn: auth.loggedIn()
+        loggedIn: auth.loggedIn(),
       }
     },
     created () {

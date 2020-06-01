@@ -1,6 +1,6 @@
 const db = require("../models");
 const Advert = db.adverts;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 // Create and Save a new Advert
 exports.create = (req, res) => {
@@ -37,19 +37,33 @@ exports.create = (req, res) => {
 
 // Retrieve all Adverts from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
-    Advert.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Adverts."
+    const name = req.query.name;
+    // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    let condition = name ? { title: name } : null;
+    const {userID} = req.query
+    if (userID){
+        Advert.findAll({ where: { "userID": userID } })
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving adverts."
+                });
             });
-        });
+    } else {
+        Advert.findAll({ where: condition })
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving Adverts."
+                });
+            });
+    }
 };
 
 // Find a single Advert with an id
@@ -134,13 +148,11 @@ exports.deleteAll = (req, res) => {
         });
 };
 
-//Find advert by userID
+//Find advert by userID doesn't work, probably because of the link
 exports.findAdvertByUserID = (req, res) => {
-    // const id = req.data.id;
     const {userID} = req.body;
-    console.log("finc advert by user id", userID)
 
-    Advert.findAll({ where: { userID: userID } })
+    Advert.find({ where: { userID: userID } })
         .then(data => {
             res.send(data);
         })

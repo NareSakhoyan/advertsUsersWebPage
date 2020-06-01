@@ -37,7 +37,7 @@ const routes = [
   {
     path: '/profile/:id',
     name: 'Profile',
-    component: () => import('../components/Profile.vue'),
+    component: () => import('../components/Profile/Profile.vue'),
   },
   {
     path: '/register',
@@ -47,7 +47,12 @@ const routes = [
   {
     path: '/addAdvert/:userID',
     name: 'AddAdvert',
-    component: () => import('../components/AddAdvert.vue'),
+    component: () => import('../components/Profile/AddAdvert.vue'),
+  },
+  {
+    path: '/adverts/:id',
+    name: 'showAdvert',
+    component: () => import('../components/showAdvert.vue'),
   },
   {
     path: '*',

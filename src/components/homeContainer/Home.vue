@@ -11,7 +11,7 @@
 
 <script>
     import Categories from "./Categories";
-    import ItemList from "./ItemList";
+    import ItemList from "./AdvertsList";
     import AdvertDataService from "../../services/AdvertDataService";
 
     export default {
@@ -30,7 +30,6 @@
                 AdvertDataService.getAll()
                     .then(response => {
                         this.itemList = response.data;
-                        console.log(response.data)
                     })
                     .catch(e => {
                         console.log(e)

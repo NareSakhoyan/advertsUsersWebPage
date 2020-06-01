@@ -17,7 +17,7 @@
                     <li class="nav-item active"><router-link class="nav-link" to="/">Home</router-link></li>
                     <li class="nav-item active"><router-link class="nav-link" to="/">About</router-link></li>
                 </ul>
-                <router-link  v-if="loggedIn" :to="`/profile/${this.getUserID()}`">
+                <router-link  v-if="loggedIn" v-bind:to="`/profile/${userID}`">
                     <a class="navbar-brand">
                         <img src="../assets/profile.png" width="30" height="30" alt="" loading="lazy">
                     </a>
@@ -35,25 +35,32 @@
 
     export default {
         name: "Header",
-        methods:{
-            logout(){
-                auth.logout()
-            },
-            getUserID() {
-                let tmp = localStorage.token
-                return tmp.slice(6, tmp.length);
-            },
-        },
         data () {
             return {
                 loggedIn: auth.loggedIn(),
-                userID: this.loggedIn? this.getUserID(): 0
+                userID: auth.loggedIn()? this.getUserID():0
             }
+        },
+        methods: {
+            getUserID(){
+                let tmp = auth.getToken();
+                return tmp.slice(5, tmp.length);
+            },
+            setUserID() {
+                this.userID = this.getUserID();
+            },
+            logout(){
+                auth.logout()
+            },
         },
         created () {
             auth.onChange = loggedIn => {
                 this.loggedIn = loggedIn
-                this.userID = this.loggedIn? this.getUserID(): ''
+            }
+        },
+        updated() {
+            if (this.loggedIn){
+                this.setUserID();
             }
         }
     }
