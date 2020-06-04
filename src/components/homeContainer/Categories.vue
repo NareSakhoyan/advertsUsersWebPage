@@ -2,7 +2,7 @@
     <div id="categories">
         <div class="menu">
             <ul>
-                <li v-for="(category, index) in categoriesList" :key="index">{{category}}</li>
+                <li v-for="(category, index) in categoriesList" :key="index" @click="selectCategory(category)">{{category}}</li>
             </ul>
         </div>
     </div>
@@ -14,6 +14,11 @@
         data () {
             return {
                 categoriesList: ['Apartments', 'Houses', 'Land', 'Commercial Properties ', 'Garages', 'Other']
+            }
+        },
+        methods: {
+            selectCategory(category){
+                console.log(category)
             }
         }
     }

@@ -14,8 +14,10 @@
   import auth from './auth'
   import Home from "./components/homeContainer/Home";
   import Header from "./components/Header";
+  // import connectDBService from "./services/connectDBService";
 
   export default {
+
     components: {Home, Header},
     data () {
       return {
@@ -26,6 +28,9 @@
       auth.onChange = loggedIn => {
         this.loggedIn = loggedIn
       }
+    },
+    beforeMount() {
+      // connectDBService.connectDB()
     }
   }
 </script>

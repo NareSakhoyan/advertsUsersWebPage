@@ -55,7 +55,7 @@ function pretendRequest (emailParam, passParam, cb) {
                         cb({ authenticated: false })
                     }
                 }, 0)
-                console.log(response);
+                console.log(response.data);
             }
             else {
                 cb({ authenticated: false })

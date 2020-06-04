@@ -45,15 +45,16 @@
             getUserByUserID(){
                 UserDataService.get(this.userID)
                 .then(response => {
-                    console.log('user by userid', response.data)
-                    this.user = response.data;
+                    this.user = response.data[0];
+                    console.log('user by userid', response.data[0])
+                    // return response.data
                 })
                 .catch(e => {
                     console.log(e);
                 })
             }
         },
-        beforeMount() {
+        mounted() {
             this.getAdvertsByUserID();
             this.getUserByUserID();
         }
